@@ -13,7 +13,7 @@ def simulateCells(numSeconds):
    #p.setGravity(0, 0, -10)
    plane_id = p.loadURDF("plane.urdf")
 
-   vid = imageio_ffmpeg.write_frames('vid.mp4', (cam_width, cam_height), fps=30)
+   vid = imageio_ffmpeg.write_frames('vid.mp4', (c.cam_width, c.cam_height), fps=30)
    vid.send(None) # The first frame of the video must be a null frame.
 
    objectIDs = p.loadSDF("box.sdf")
