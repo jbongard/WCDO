@@ -67,7 +67,7 @@ def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 ):
 
    vid, objectIDs = prep()
  
-   for t in range(0,1000*numSeconds):
+   for t in range(0,625*numSeconds):
 
       if motilityStrength>0:
 
