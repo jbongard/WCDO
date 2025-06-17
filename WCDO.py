@@ -6,6 +6,15 @@ import pybullet as p
 import pybullet_data
 import imageio_ffmpeg
 
+def captureFrame(t,vid):
+
+   if t%20==0:
+      c.cam_view_matrix = p.computeViewMatrixFromYawPitchRoll(c.cam_target_pos, c.cam_distance, c.cam_yaw, c.cam_pitch, c.cam_roll, c.cam_up_axis_idx)
+      c.cam_projection_matrix = p.computeProjectionMatrixFOV(c.cam_fov, c.cam_width*1./c.cam_height, c.cam_near_plane, c.cam_far_plane)
+      image = p.getCameraImage(c.cam_width, c.cam_height,c.cam_view_matrix, c.cam_projection_matrix)[2][:, :, :3]
+      vid.send(np.ascontiguousarray(image))
+      #c.cam_yaw = c.cam_yaw + 1
+
 def prep():
 
    physicsClient = p.connect(p.DIRECT)
@@ -23,26 +32,25 @@ def prep():
 
    return vid,objectIDs
 
+def push(objectIDs):
+
+   for i in range(0,len(objectIDs)):
+
+      p.applyExternalForce(objectIDs[i], -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
+
 def simulateCells(numSeconds):
 
    vid, objectIDs = prep()
  
    for t in range(0,1000*numSeconds):
 
-      for i in range(0,len(objectIDs)):
-         p.applyExternalForce(objectIDs[i], -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
+      push(objectIDs)
 
-      if t%20==0:
-         c.cam_view_matrix = p.computeViewMatrixFromYawPitchRoll(c.cam_target_pos, c.cam_distance, c.cam_yaw, c.cam_pitch, c.cam_roll, c.cam_up_axis_idx)
-         c.cam_projection_matrix = p.computeProjectionMatrixFOV(c.cam_fov, c.cam_width*1./c.cam_height, c.cam_near_plane, c.cam_far_plane)
-         image = p.getCameraImage(c.cam_width, c.cam_height,c.cam_view_matrix, c.cam_projection_matrix)[2][:, :, :3]
-         vid.send(np.ascontiguousarray(image))
-         #c.cam_yaw = c.cam_yaw + 1
+      captureFrame(t,vid)
 
       p.stepSimulation()
 
-   vid.close()
-   p.disconnect()
+   terminate_gracefully(vid)
 
 def sprinkleCells(numCells):
 
@@ -52,3 +60,8 @@ def sprinkleCells(numCells):
       pyrosim.Send_Sphere(name="Sphere", pos=[50*random.random()-25,50*random.random()-25,0.5] , radius=0.5)
 
    pyrosim.End()
+
+def terminate_gracefully(vid):
+
+   vid.close()
+   p.disconnect()
