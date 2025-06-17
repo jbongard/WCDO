@@ -6,6 +6,10 @@ import pybullet as p
 import pybullet_data
 import imageio_ffmpeg
 
+def addMotility(strength,numSeconds):
+
+   simulateCells(numSeconds,cellMotilityStrength=strength,motility=True)
+
 def captureFrame(t,vid):
 
    if t%20==0:
@@ -38,13 +42,15 @@ def push(objectIDs):
 
       p.applyExternalForce(objectIDs[i], -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
 
-def simulateCells(numSeconds):
+def simulateCells(numSeconds,cellMotilityStrength=0,motility=False):
 
    vid, objectIDs = prep()
  
    for t in range(0,1000*numSeconds):
 
-      push(objectIDs)
+      if motility==True:
+
+         push(objectIDs)
 
       captureFrame(t,vid)
 
