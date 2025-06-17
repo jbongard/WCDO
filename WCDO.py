@@ -43,7 +43,7 @@ def pullTogether(objectIDs):
 
       pos, orientation = p.getBasePositionAndOrientation(objID)
 
-      p.applyExternalForce(objID, -1, [50*pos[0],50*pos[1],50*pos[2]], [0, 0, 0], p.WORLD_FRAME)
+      p.applyExternalForce(objID, -1, [ -50*pos[0] , -50*pos[1] , -50*pos[2] ], [0, 0, 0], p.WORLD_FRAME)
 
 def push(objectIDs):
 
