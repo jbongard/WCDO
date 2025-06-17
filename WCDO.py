@@ -4,14 +4,6 @@ import numpy as np
 import pybullet as p
 import pybullet_data
 import imageio_ffmpeg
-from base64 import b64encode
-from IPython.display import HTML
-
-def showCells():
-
-   mp4 = open('vid.mp4', 'rb').read()
-   data_url = "data:video/mp4;base64," + b64encode(mp4).decode()
-   HTML('<video width=960 controls><source src="%s" type="video/mp4"></video>' % data_url)
 
 def simulateCells():
 
