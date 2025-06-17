@@ -1,7 +1,7 @@
 import pyrosim.pyrosim as pyrosim
 import random
 
-def sprinkleCells(numCells=100):
+def sprinkleCells(numCells):
 
    pyrosim.Start_SDF("box.sdf")
 
