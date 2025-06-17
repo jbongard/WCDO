@@ -40,7 +40,7 @@ def pullTogether(objectIDs):
 
    for i in range(0,len(objectIDs)):
 
-      p.getLinkState(objectIDs[i], -1)
+      p.getLinkState(objectIDs[i], 0)
       pos = link_state[0]
       p.applyExternalForce(objectIDs[i], -1, [50*pos[0],50*pos[1],50*pos[2]], [0, 0, 0], p.WORLD_FRAME)
 
