@@ -37,25 +37,33 @@ def prep():
 
    return vid,objectIDs
 
-def pullTogether(objectIDs):
+def pullTogether(objectIDs,attractionStrength):
 
    for objID in objectIDs:
 
       pos, orientation = p.getBasePositionAndOrientation(objID)
 
-      p.applyExternalForce(objID, -1, [ -50*pos[0] , -50*pos[1] , -50*pos[2] ], [0, 0, 0], p.WORLD_FRAME)
+      x = 2 * attractionStrength * pos[0] - attractionStrength
+      y = 2 * attractionStrength * pos[1] - attractionStrength
+      z = 2 * attractionStrength * pos[2] - attractionStrength
 
-def push(objectIDs):
+      p.applyExternalForce(objID, -1, [ -x , -y , -z ], [0, 0, 0], p.WORLD_FRAME)
+
+def push(objectIDs,motilityStrength):
 
    for objID in objectIDs:
 
-      p.applyExternalForce(objID, -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
+      x = 2 * motilityStrength * random.random() - motilityStrength
+      y = 2 * motilityStrength * random.random() - motilityStrength
+      z = 2 * motilityStrength * random.random() - motilityStrength
+
+      p.applyExternalForce(objID, -1, [x,y,z], [0, 0, 0], p.WORLD_FRAME)
 
 def rebootMulticellularity(numSeconds,strength,loneliness):
 
    simulateCells(numSeconds,motilityStrength=strength,attractionStrength=loneliness)
 
-def simulateCells(numSeconds,motilityStrength=0,attractionStrength=0):
+def simulateCells(numSeconds,motility=False,attraction=False):
 
    vid, objectIDs = prep()
  
@@ -63,11 +71,11 @@ def simulateCells(numSeconds,motilityStrength=0,attractionStrength=0):
 
       if motilityStrength>0:
 
-         push(objectIDs)
+         push(objectIDs,motilityStrength)
 
       if attractionStrength>0:
 
-         pullTogether(objectIDs)
+         pullTogether(objectIDs,attractionStrength)
 
       captureFrame(t,vid)
 
