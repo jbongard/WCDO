@@ -46,7 +46,3 @@ def sprinkleCells(numCells):
       pyrosim.Send_Sphere(name="Sphere", pos=[50*random.random()-25,50*random.random()-25,0.5] , radius=0.5)
 
    pyrosim.End()
-
-# ------------- main function ---------------
-
-simulateCells(10)
