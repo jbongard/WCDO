@@ -1,3 +1,4 @@
+import constants as c
 import pyrosim.pyrosim as pyrosim
 import random
 import numpy as np
@@ -6,12 +7,6 @@ import pybullet_data
 import imageio_ffmpeg
 
 def simulateCells():
-
-   cam_target_pos = [0, 0, 0] #  -0.2, 0.2]
-   cam_distance = 48 # 2.05
-   cam_yaw, cam_pitch, cam_roll = -50, -40, 0
-   cam_width, cam_height = 480*2, 368*2
-   cam_up, cam_up_axis_idx, cam_near_plane, cam_far_plane, cam_fov = [0, 0, 1], 2, 0.01, 100, 60
 
    physicsClient = p.connect(p.DIRECT)
    p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -32,11 +27,11 @@ def simulateCells():
          p.applyExternalForce(objectIDs[i], -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
 
       if t%20==0:
-         cam_view_matrix = p.computeViewMatrixFromYawPitchRoll(cam_target_pos, cam_distance, cam_yaw, cam_pitch, cam_roll, cam_up_axis_idx)
-         cam_projection_matrix = p.computeProjectionMatrixFOV(cam_fov, cam_width*1./cam_height, cam_near_plane, cam_far_plane)
-         image = p.getCameraImage(cam_width, cam_height,cam_view_matrix, cam_projection_matrix)[2][:, :, :3]
+         c.cam_view_matrix = p.computeViewMatrixFromYawPitchRoll(c.cam_target_pos, c.cam_distance, c.cam_yaw, c.cam_pitch, c.cam_roll, c.cam_up_axis_idx)
+         c.cam_projection_matrix = p.computeProjectionMatrixFOV(c.cam_fov, c.cam_width*1./c.cam_height, c.cam_near_plane, c.cam_far_plane)
+         image = p.getCameraImage(c.cam_width, c.cam_height,c.cam_view_matrix, c.cam_projection_matrix)[2][:, :, :3]
          vid.send(np.ascontiguousarray(image))
-         #cam_yaw = cam_yaw + 1
+         #c.cam_yaw = c.cam_yaw + 1
 
       p.stepSimulation()
 
@@ -51,3 +46,7 @@ def sprinkleCells(numCells):
       pyrosim.Send_Sphere(name="Sphere", pos=[50*random.random()-25,50*random.random()-25,0.5] , radius=0.5)
 
    pyrosim.End()
+
+# ------------- main function ---------------
+
+simulateCells(10)
