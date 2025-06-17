@@ -7,6 +7,12 @@ import imageio_ffmpeg
 from base64 import b64encode
 from IPython.display import HTML
 
+def showCells():
+
+   mp4 = open('vid.mp4', 'rb').read()
+   data_url = "data:video/mp4;base64," + b64encode(mp4).decode()
+   HTML('<video width=960 controls><source src="%s" type="video/mp4"></video>' % data_url)
+
 def simulateCells():
 
    cam_target_pos = [0, 0, 0] #  -0.2, 0.2]
@@ -30,8 +36,8 @@ def simulateCells():
 
    for t in range(0,1000):
 
-   for i in range(0,len(objectIDs)):
-      p.applyExternalForce(objectIDs[i], -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
+      for i in range(0,len(objectIDs)):
+         p.applyExternalForce(objectIDs[i], -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
 
       if t%20==0:
          cam_view_matrix = p.computeViewMatrixFromYawPitchRoll(cam_target_pos, cam_distance, cam_yaw, cam_pitch, cam_roll, cam_up_axis_idx)
