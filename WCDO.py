@@ -1,4 +1,4 @@
-import constants as c
+import WCDO.constants as c
 import pyrosim.pyrosim as pyrosim
 import random
 import numpy as np
@@ -6,7 +6,7 @@ import pybullet as p
 import pybullet_data
 import imageio_ffmpeg
 
-def simulateCells():
+def simulateCells(numSeconds):
 
    physicsClient = p.connect(p.DIRECT)
    p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -21,7 +21,7 @@ def simulateCells():
    for i in range(0,len(objectIDs)):
       p.changeVisualShape(objectIDs[i], -1, rgbaColor=[random.random(), random.random(), random.random(), 1])
 
-   for t in range(0,1000):
+   for t in range(0,1000*numSeconds):
 
       for i in range(0,len(objectIDs)):
          p.applyExternalForce(objectIDs[i], -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
