@@ -6,7 +6,7 @@ import pybullet as p
 import pybullet_data
 import imageio_ffmpeg
 
-def simulateCells(numSeconds):
+def prep():
 
    physicsClient = p.connect(p.DIRECT)
    p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -21,6 +21,12 @@ def simulateCells(numSeconds):
    for i in range(0,len(objectIDs)):
       p.changeVisualShape(objectIDs[i], -1, rgbaColor=[random.random(), random.random(), random.random(), 1])
 
+   return vid,objectIDs
+
+def simulateCells(numSeconds):
+
+   vid, objectIDs = prep()
+ 
    for t in range(0,1000*numSeconds):
 
       for i in range(0,len(objectIDs)):
