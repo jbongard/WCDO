@@ -31,24 +31,25 @@ def prep():
 
    objectIDs = p.loadSDF("box.sdf")
 
-   for i in range(0,len(objectIDs)):
-      p.changeVisualShape(objectIDs[i], -1, rgbaColor=[random.random(), random.random(), random.random(), 1])
+   for objID in objectIDs:
+
+      p.changeVisualShape(objID, -1, rgbaColor=[random.random(), random.random(), random.random(), 1])
 
    return vid,objectIDs
 
 def pullTogether(objectIDs):
 
-   for i in range(0,len(objectIDs)):
+   for objID in objectIDs:
 
-      link_state = p.getLinkState(objectIDs[i], 0)
+      link_state = p.getLinkState(objID, -1)
       pos = link_state[0]
-      p.applyExternalForce(objectIDs[i], -1, [50*pos[0],50*pos[1],50*pos[2]], [0, 0, 0], p.WORLD_FRAME)
+      p.applyExternalForce(objID, -1, [50*pos[0],50*pos[1],50*pos[2]], [0, 0, 0], p.WORLD_FRAME)
 
 def push(objectIDs):
 
-   for i in range(0,len(objectIDs)):
+   for objID in objectIDs:
 
-      p.applyExternalForce(objectIDs[i], -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
+      p.applyExternalForce(objID, -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
 
 def rebootMulticellularity(numSeconds,strength,loneliness):
 
