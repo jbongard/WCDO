@@ -8,7 +8,7 @@ import imageio_ffmpeg
 
 def addMotility(numSeconds,strength):
 
-   simulateCells(numSeconds,cellMotilityStrength=strength)
+   simulateCells(numSeconds,motilityStrength=strength)
 
 def captureFrame(t,vid):
 
