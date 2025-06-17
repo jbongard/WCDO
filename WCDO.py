@@ -6,9 +6,9 @@ import pybullet as p
 import pybullet_data
 import imageio_ffmpeg
 
-def addMotility(strength,numSeconds):
+def addMotility(numSeconds,strength):
 
-   simulateCells(numSeconds,cellMotilityStrength=strength,motility=True)
+   simulateCells(numSeconds,cellMotilityStrength=strength)
 
 def captureFrame(t,vid):
 
@@ -36,21 +36,37 @@ def prep():
 
    return vid,objectIDs
 
+def pullTogether(objectIDs):
+
+   for i in range(0,len(objectIDs)):
+
+      p.getLinkState(objectIDs[i], -1)
+      pos = link_state[0]
+      p.applyExternalForce(objectIDs[i], -1, [50*pos[0],50*pos[1],50*pos[2]], [0, 0, 0], p.WORLD_FRAME)
+
 def push(objectIDs):
 
    for i in range(0,len(objectIDs)):
 
       p.applyExternalForce(objectIDs[i], -1, [10*random.random()-5, 10*random.random()-5, 0], [0, 0, 0], p.WORLD_FRAME)
 
-def simulateCells(numSeconds,cellMotilityStrength=0,motility=False):
+def rebootMulticellularity(numSeconds,strength,loneliness):
+
+   simulateCells(numSeconds,motilityStrength=strength,attractionStrength=loneliness)
+
+def simulateCells(numSeconds,motilityStrength=0,attractionStrength=0):
 
    vid, objectIDs = prep()
  
    for t in range(0,1000*numSeconds):
 
-      if motility==True:
+      if motilityStrength>0:
 
          push(objectIDs)
+
+      if attractionStrength>0:
+
+         pullTogether(objectIDs)
 
       captureFrame(t,vid)
 
