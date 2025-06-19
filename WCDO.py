@@ -14,7 +14,7 @@ def addLoneliness(numSeconds):
 
    simulateCells(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength)
 
-def addMotility(numSeconds)
+def addMotility(numSeconds):
 
    simulateCells(numSeconds,motilityStrength=c.motilityStrength)
 
