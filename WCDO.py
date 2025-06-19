@@ -29,6 +29,8 @@ def captureFrame(t,vid):
 
 def intervene(objectIDs,intervention):
 
+   print('got here')
+
    for objID in objectIDs:
 
       pos, orientation = p.getBasePositionAndOrientation(objID)
