@@ -37,14 +37,9 @@ def intervene(objectIDs,intervention):
       toY = pos[1] + 1
       toZ = pos[2] + 1
 
-      line_id = p.addUserDebugLine(
-         lineFromXYZ=pos,      # Starting point (x, y, z)
-         lineToXYZ=[toX, toY, toZ],        # Ending point (x, y, z)
-         lineColorRGB=[1, 0, 0],     # Color (red, green, blue) - values 0-1
-         lineWidth=2.0,              # Line thickness
-         lifeTime=0                  # Duration (0 = permanent until removed)
-      )
-      print(line_id)
+      line_id = p.addUserDebugLine(lineFromXYZ=pos,lineToXYZ=[toX, toY, toZ],,lineColorRGB=[1, 0, 0],lineWidth=2,lifeTime=0)
+
+      print(objID,line_id)
 
 def prep():
 
