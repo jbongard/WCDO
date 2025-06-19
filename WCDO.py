@@ -33,11 +33,15 @@ def intervene(objectIDs,intervention):
 
       pos, orientation = p.getBasePositionAndOrientation(objID)
 
+      fromX = pos[0]
+      fromY = pos[1]
+      fromZ = pos[2]
+
       toX = pos[0] + 1
       toY = pos[1] + 1
       toZ = pos[2] + 1
 
-      line_id = p.addUserDebugLine(lineFromXYZ=pos,lineToXYZ=[toX, toY, toZ],parentObjectUniqueId=objID,parentLinkIndex=-1)
+      line_id = p.addUserDebugLine(lineFromXYZ=[fromX,fromY,fromZ],lineToXYZ=[toX, toY, toZ],parentObjectUniqueId=objID,parentLinkIndex=-1)
       print(objID,line_id)
 
 def prep():
