@@ -47,7 +47,7 @@ def intervene(objectIDs,intervention):
 
 def prep():
 
-   physicsClient = p.connect(p.GUI)
+   physicsClient = p.connect(p.DIRECT)
    p.setAdditionalSearchPath(pybullet_data.getDataPath())
    #p.setGravity(0, 0, -10)
    plane_id = p.loadURDF("plane.urdf")
