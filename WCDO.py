@@ -99,7 +99,7 @@ def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , in
 
          pullTogether(objectIDs,attractionStrength)
 
-      if intervention != None:
+      if t==0 and intervention != None:
 
          intervene(objectIDs,intervention)
 
