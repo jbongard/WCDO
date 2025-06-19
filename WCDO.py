@@ -61,9 +61,9 @@ def push(objectIDs,motilityStrength):
 
 def rebootMulticellularity(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength):
 
-   simulateCells(numSeconds,motilityStrength=strength,attractionStrength=attractionStrength)
+   simulateCells(numSeconds,motilityStrength=motilityStrength,attractionStrength=attractionStrength)
 
-def simulateCells(numSeconds, motilityStrength = c.motilityStrength , attractionStrength = c.attractionStrength ):
+def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 ):
 
    vid, objectIDs = prep()
  
