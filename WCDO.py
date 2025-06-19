@@ -59,7 +59,7 @@ def push(objectIDs,motilityStrength):
 
       p.applyExternalForce(objID, -1, [x,y,z], [0, 0, 0], p.WORLD_FRAME)
 
-def rebootMulticellularity(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength):
+def addLoneliness(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength):
 
    simulateCells(numSeconds,motilityStrength=motilityStrength,attractionStrength=attractionStrength)
 
