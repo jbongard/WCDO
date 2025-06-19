@@ -63,7 +63,7 @@ def rebootMulticellularity(numSeconds,strength,loneliness):
 
    simulateCells(numSeconds,motilityStrength=strength,attractionStrength=loneliness)
 
-def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 ):
+def simulateCells(numSeconds, motilityStrength = c.motilityStrength , attractionStrength = c.attractionStrength ):
 
    vid, objectIDs = prep()
  
