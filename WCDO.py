@@ -6,9 +6,17 @@ import pybullet as p
 import pybullet_data
 import imageio_ffmpeg
 
-def addMotility(numSeconds,motilityStrength=c.motilityStrength):
+def addIntervention(numSeconds,intervention):
 
-   simulateCells(numSeconds,motilityStrength=motilityStrength)
+   simulateCells(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength,intervention)
+
+def addLoneliness(numSeconds):
+
+   simulateCells(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength)
+
+def addMotility(numSeconds)
+
+   simulateCells(numSeconds,motilityStrength=c.motilityStrength)
 
 def captureFrame(t,vid):
 
@@ -18,6 +26,24 @@ def captureFrame(t,vid):
       image = p.getCameraImage(c.cam_width, c.cam_height,c.cam_view_matrix, c.cam_projection_matrix)[2][:, :, :3]
       vid.send(np.ascontiguousarray(image))
       #c.cam_yaw = c.cam_yaw + 1
+
+def intervene(objectIDs,intervention):
+
+   for objID in objectIDs:
+
+      pos, orientation = p.getBasePositionAndOrientation(objID)
+
+      toX = pos[0] + 1
+      toY = pos[1] + 1
+      toZ = pos[2] + 1
+
+      line_id = p.addUserDebugLine(
+         lineFromXYZ=pos,      # Starting point (x, y, z)
+         lineToXYZ=[toX, toY, toZ],        # Ending point (x, y, z)
+         lineColorRGB=[1, 0, 0],     # Color (red, green, blue) - values 0-1
+         lineWidth=2.0,              # Line thickness
+         lifeTime=1                  # Duration (0 = permanent until removed)
+      )
 
 def prep():
 
@@ -59,11 +85,7 @@ def push(objectIDs,motilityStrength):
 
       p.applyExternalForce(objID, -1, [x,y,z], [0, 0, 0], p.WORLD_FRAME)
 
-def addLoneliness(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength):
-
-   simulateCells(numSeconds,motilityStrength=motilityStrength,attractionStrength=attractionStrength)
-
-def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 ):
+def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , intervention = None):
 
    vid, objectIDs = prep()
  
@@ -76,6 +98,10 @@ def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 ):
       if attractionStrength>0:
 
          pullTogether(objectIDs,attractionStrength)
+
+      if intervention != None:
+
+         intervene(objectIDs,intervention)
 
       captureFrame(t,vid)
 
