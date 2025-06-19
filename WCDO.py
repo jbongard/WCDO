@@ -44,6 +44,7 @@ def intervene(objectIDs,intervention):
          lineWidth=2.0,              # Line thickness
          lifeTime=0                  # Duration (0 = permanent until removed)
       )
+      print(line_id)
 
 def prep():
 
