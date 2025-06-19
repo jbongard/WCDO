@@ -29,8 +29,6 @@ def captureFrame(t,vid):
 
 def intervene(objectIDs,intervention):
 
-   print('got here')
-
    for objID in objectIDs:
 
       pos, orientation = p.getBasePositionAndOrientation(objID)
@@ -44,7 +42,7 @@ def intervene(objectIDs,intervention):
          lineToXYZ=[toX, toY, toZ],        # Ending point (x, y, z)
          lineColorRGB=[1, 0, 0],     # Color (red, green, blue) - values 0-1
          lineWidth=2.0,              # Line thickness
-         lifeTime=1                  # Duration (0 = permanent until removed)
+         lifeTime=0                  # Duration (0 = permanent until removed)
       )
 
 def prep():
@@ -116,7 +114,12 @@ def sprinkleCells(numCells):
    pyrosim.Start_SDF("box.sdf")
 
    for i in range(0,numCells):
-      pyrosim.Send_Sphere(name="Sphere", pos=[50*random.random()-25,50*random.random()-25,0.5] , radius=0.5)
+
+      x = c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0)
+      y = c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0)
+      z = c.cellRadius
+
+      pyrosim.Send_Sphere(name="Sphere", pos=[x,y,z] , radius=c.cellRadius)
 
    pyrosim.End()
 
