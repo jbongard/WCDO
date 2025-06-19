@@ -41,13 +41,7 @@ def intervene(objectIDs,intervention):
       toY = pos[1] + 2
       toZ = pos[2] + 2
 
-      # line_id = p.addUserDebugLine(lineFromXYZ=[fromX,fromY,fromZ],lineToXYZ=[toX, toY, toZ],parentObjectUniqueId=objID,parentLinkIndex=-1)
-      line_id = p.addUserDebugLine(
-         lineFromXYZ=[0, 0, 0],
-         lineToXYZ=[1, 1, 1], 
-         lineColorRGB=[1, 0, 0],  # Red color
-         lineWidth=1.0
-      )
+      line_id = p.addUserDebugLine([fromX,fromY,fromZ],[toX, toY, toZ])
 
       print(objID,line_id)
 
