@@ -8,7 +8,7 @@ import imageio_ffmpeg
 
 def addIntervention(numSeconds,intervention):
 
-   simulateCells(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength,intervention)
+   simulateCells(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength,intervention=intervention)
 
 def addLoneliness(numSeconds):
 
