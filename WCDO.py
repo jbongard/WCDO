@@ -38,6 +38,7 @@ def intervene(objectIDs,intervention):
       toZ = pos[2] + 1
 
       line_id = p.addUserDebugLine(lineFromXYZ=pos,lineToXYZ=[toX, toY, toZ],parentObjectUniqueId=objID,parentLinkIndex=-1)
+      print(objID,line_id)
 
 def prep():
 
