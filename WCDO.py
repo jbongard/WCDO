@@ -6,9 +6,9 @@ import pybullet as p
 import pybullet_data
 import imageio_ffmpeg
 
-def addMotility(numSeconds,strength):
+def addMotility(numSeconds,motilityStrength=c.motilityStrength):
 
-   simulateCells(numSeconds,motilityStrength=strength)
+   simulateCells(numSeconds,motilityStrength=motilityStrength)
 
 def captureFrame(t,vid):
 
@@ -59,9 +59,9 @@ def push(objectIDs,motilityStrength):
 
       p.applyExternalForce(objID, -1, [x,y,z], [0, 0, 0], p.WORLD_FRAME)
 
-def rebootMulticellularity(numSeconds,strength,loneliness):
+def rebootMulticellularity(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength):
 
-   simulateCells(numSeconds,motilityStrength=strength,attractionStrength=loneliness)
+   simulateCells(numSeconds,motilityStrength=strength,attractionStrength=attractionStrength)
 
 def simulateCells(numSeconds, motilityStrength = c.motilityStrength , attractionStrength = c.attractionStrength ):
 
