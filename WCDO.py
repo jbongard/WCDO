@@ -27,6 +27,10 @@ def captureFrame(t,vid):
       vid.send(np.ascontiguousarray(image))
       #c.cam_yaw = c.cam_yaw + 1
 
+def createElectricField(electricField):
+
+   print(electricField)
+
 def intervene(objectIDs,intervention):
 
    for objID in objectIDs:
