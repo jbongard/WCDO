@@ -30,18 +30,25 @@ def captureFrame(t,vid):
 
 def createElectricField(electricField):
 
-   x    = np.linspace(-c.petriDishWidth, c.petriDishWidth, 30)
-   y    = np.linspace(-c.petriDishWidth, c.petriDishWidth, 30)
+   x    = np.linspace(-c.petriDishWidth/2, c.petriDishWidth/2, 30)
+   y    = np.linspace(-c.petriDishWidth/2, c.petriDishWidth/2, 30)
    X, Y = np.meshgrid(x, y)
 
-   fX   = electricField[0] * X + electricField[1] * Y + electricField[2] * np.sin(X) + electricField[3] * np.sin(Y)
-   fY   = electricField[4] * X + electricField[5] * Y + electricField[6] * np.sin(X) + electricField[7] * np.sin(Y)
+   fX   =      electricField[0] * X
+   fX   = fX + electricField[1] * Y
+   fX   = fX + electricField[2] * np.sin(X/(c.petriDishWidth/2) * 2.0 * 3.14159)
+   fX   = fX + electricField[3] * np.sin(Y/(c.petriDishWidth/2) * 2.0 * 3.14159)
+
+   fY   =      electricField[4] * X
+   fY   = fY + electricField[5] * Y
+   fY   = fY + electricField[6] * np.sin(X/(c.petriDishWidth/2) * 2.0 * 3.14159)
+   fY   = fY + electricField[7] * np.sin(Y/(c.petriDishWidth/2) * 2.0 * 3.14159)
 
    magnitude = np.sqrt(fX**2 + fY**2)
    fX = fX / (magnitude + 1e-8)
    fY = fY / (magnitude + 1e-8)
 
-   fig, ax = plt.subplots()
+   fig, ax = plt.subplots(dpi=300)
 
    q = ax.quiver(X, Y, fX, fY, magnitude, cmap='coolwarm', scale=20, alpha=0.8, width=0.003)
 
