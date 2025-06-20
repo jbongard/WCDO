@@ -75,7 +75,7 @@ def intervene(objectIDs,electricField):
       fy   = fy + electricField[6] * np.sin(x/(c.petriDishWidth/2) * 2.0 * 3.14159)
       fy   = fy + electricField[7] * np.sin(y/(c.petriDishWidth/2) * 2.0 * 3.14159)
 
-      p.applyExternalForce(objID, -1, [ x , y , 0 ], [0, 0, 0], p.WORLD_FRAME)
+      p.applyExternalForce(objID, -1, [ fx , fy , 0 ], [0, 0, 0], p.WORLD_FRAME)
 
 def prep():
 
