@@ -81,7 +81,7 @@ def prep():
 
    physicsClient = p.connect(p.DIRECT)
    p.setAdditionalSearchPath(pybullet_data.getDataPath())
-   p.setGravity(0, 0, -10)
+   # p.setGravity(0, 0, -10)
    plane_id = p.loadURDF("plane.urdf")
 
    vid = imageio_ffmpeg.write_frames('vid.mp4', (c.cam_width, c.cam_height), fps=30)
