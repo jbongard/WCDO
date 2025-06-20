@@ -9,7 +9,7 @@ import imageio_ffmpeg
 
 def addElectricField(numSeconds,electricField):
 
-   simulateCells(numSeconds,motilityStrength=0,attractionStrength=0,electricField=electricField)
+   simulateCells(numSeconds,motilityStrength=0,attractionStrength=c.attractionStrength,electricField=electricField)
 
 def addLoneliness(numSeconds):
 
