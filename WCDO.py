@@ -7,9 +7,9 @@ import pybullet as p
 import pybullet_data
 import imageio_ffmpeg
 
-def addIntervention(numSeconds,intervention):
+def addElectricField(numSeconds,electricField):
 
-   simulateCells(numSeconds,motilityStrength=c.motilityStrength,attractionStrength=c.attractionStrength,intervention=intervention)
+   simulateCells(numSeconds,motilityStrength=0,attractionStrength=0,electricField=electricField)
 
 def addLoneliness(numSeconds):
 
@@ -56,23 +56,26 @@ def createElectricField(electricField):
 
    plt.show()
 
-def intervene(objectIDs,intervention):
+def intervene(objectIDs,electricField):
 
    for objID in objectIDs:
 
       pos, orientation = p.getBasePositionAndOrientation(objID)
 
-      fromX = pos[0]
-      fromY = pos[1]
-      fromZ = pos[2]
+      x = pos[0]
+      y = pos[1]
 
-      toX = pos[0] + 2
-      toY = pos[1] + 2
-      toZ = pos[2] + 2
+      fx   =      electricField[0] * x
+      fx   = fx + electricField[1] * y
+      fx   = fx + electricField[2] * np.sin(x/(c.petriDishWidth/2) * 2.0 * 3.14159)
+      fx   = fx + electricField[3] * np.sin(y/(c.petriDishWidth/2) * 2.0 * 3.14159)
 
-      line_id = p.addUserDebugLine([0,0,0],[1,1,1]) # [fromX,fromY,fromZ],[toX, toY, toZ])
+      fy   =      electricField[4] * x
+      fy   = fy + electricField[5] * y
+      fy   = fy + electricField[6] * np.sin(x/(c.petriDishWidth/2) * 2.0 * 3.14159)
+      fy   = fy + electricField[7] * np.sin(y/(c.petriDishWidth/2) * 2.0 * 3.14159)
 
-      print(objID,line_id)
+      p.applyExternalForce(objID, -1, [ x , y , 0 ], [0, 0, 0], p.WORLD_FRAME)
 
 def prep():
 
@@ -114,7 +117,7 @@ def push(objectIDs,motilityStrength):
 
       p.applyExternalForce(objID, -1, [x,y,z], [0, 0, 0], p.WORLD_FRAME)
 
-def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , intervention = None):
+def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , electricField = None):
 
    vid, objectIDs = prep()
  
@@ -128,9 +131,9 @@ def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , in
 
          pullTogether(objectIDs,attractionStrength)
 
-      if t==0 and intervention != None:
+      if electricField != None:
 
-         intervene(objectIDs,intervention)
+         intervene(objectIDs,electricField)
 
       captureFrame(t,vid)
 
