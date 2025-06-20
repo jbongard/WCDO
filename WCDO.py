@@ -29,7 +29,14 @@ def captureFrame(t,vid):
 
 def createElectricField(electricField):
 
-   print(electricField)
+   x    = np.linspace(-c.petriDishWidth, c.petriDishWidth, 30)
+   y    = np.linspace(-c.petriDishWidth, c.petriDishWidth, 30)
+   X, Y = np.meshgrid(x, y)
+
+   fX   = electricField[0] * X + electricField[1] * Y + electricField[2] * sin(X) + electricField[3] * sin(Y)
+   fY   = electricField[4] * X + electricField[5] * Y + electricField[6] * sin(X) + electricField[7] * sin(Y)
+
+   print(fX,fY)
 
 def intervene(objectIDs,intervention):
 
