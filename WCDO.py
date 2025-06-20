@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import WCDO.constants as c
 import pyrosim.pyrosim as pyrosim
 import random
@@ -36,7 +37,11 @@ def createElectricField(electricField):
    fX   = electricField[0] * X + electricField[1] * Y + electricField[2] * np.sin(X) + electricField[3] * np.sin(Y)
    fY   = electricField[4] * X + electricField[5] * Y + electricField[6] * np.sin(X) + electricField[7] * np.sin(Y)
 
-   print(fX,fY)
+   fig, ax = plt.subplots()
+
+   q = ax.quiver(X, Y, fX, fY, 1, cmap='coolwarm', scale=20, alpha=0.8, width=0.003)
+
+   plt.show()
 
 def intervene(objectIDs,intervention):
 
