@@ -48,7 +48,7 @@ def createElectricField(electricField):
    fX = fX / (magnitude + 1e-8)
    fY = fY / (magnitude + 1e-8)
 
-   fig, ax = plt.subplots(dpi=300)
+   fig, ax = plt.subplots(figsize=(4,4),dpi=300)
 
    q = ax.quiver(X, Y, fX, fY, magnitude, cmap='coolwarm', scale=20, alpha=0.8, width=0.003)
 
