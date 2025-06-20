@@ -45,6 +45,8 @@ def createElectricField(electricField):
 
    q = ax.quiver(X, Y, fX, fY, magnitude, cmap='coolwarm', scale=20, alpha=0.8, width=0.003)
 
+   plt.axis('off')
+
    plt.show()
 
 def intervene(objectIDs,intervention):
