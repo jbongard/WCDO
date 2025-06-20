@@ -37,9 +37,13 @@ def createElectricField(electricField):
    fX   = electricField[0] * X + electricField[1] * Y + electricField[2] * np.sin(X) + electricField[3] * np.sin(Y)
    fY   = electricField[4] * X + electricField[5] * Y + electricField[6] * np.sin(X) + electricField[7] * np.sin(Y)
 
+   magnitude = np.sqrt(fX**2 + fY**2)
+   fX = fX / (magnitude + 1e-8)
+   fY = fY / (magnitude + 1e-8)
+
    fig, ax = plt.subplots()
 
-   q = ax.quiver(X, Y, fX, fY, 1, cmap='coolwarm', scale=20, alpha=0.8, width=0.003)
+   q = ax.quiver(X, Y, fX, fY, magnitude, cmap='coolwarm', scale=20, alpha=0.8, width=0.003)
 
    plt.show()
 
