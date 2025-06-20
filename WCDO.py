@@ -50,7 +50,7 @@ def createElectricField(electricField):
 
    fig, ax = plt.subplots(figsize=(2,2),dpi=300)
 
-   q = ax.quiver(X, Y, fX, fY, magnitude, cmap='coolwarm', scale=20, alpha=0.0, width=0.003)
+   q = ax.quiver(X, Y, fX, fY, magnitude, cmap='coolwarm', scale=20, alpha=1.0, width=0.003)
 
    plt.axis('off')
 
