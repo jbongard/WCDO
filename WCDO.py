@@ -151,13 +151,13 @@ def sprinkleCells(numCells):
 
       x = int(c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0))
       y = int(c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0))
-      z = int(c.cellRadius)
+      z = c.cellRadius
       position = [x,y,z]
 
       while position in positions:
          x = int(c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0))
          y = int(c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0))
-         z = int(c.cellRadius)
+         z = c.cellRadius
          position = [x,y,z]
 
       positions.append(position)
