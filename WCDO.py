@@ -145,20 +145,22 @@ def sprinkleCells(numCells):
 
    pyrosim.Start_SDF("box.sdf")
 
-   positions = {}
+   positions = [] 
 
    for i in range(0,numCells):
 
-      x = c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0)
-      y = c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0)
-      z = c.cellRadius
+      x = int(c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0))
+      y = int(c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0))
+      z = int(c.cellRadius)
       position = [x,y,z]
 
       while position in positions:
-         x = c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0) 
-         y = c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0)
-         z = c.cellRadius
+         x = int(c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0))
+         y = int(c.petriDishWidth * random.random() - (c.petriDishWidth / 2.0))
+         z = int(c.cellRadius)
          position = [x,y,z]
+
+      positions.append(position)
 
       pyrosim.Send_Sphere(name="Sphere", pos=[x,y,z] , radius=c.cellRadius)
 
