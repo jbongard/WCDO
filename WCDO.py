@@ -77,14 +77,14 @@ def intervene(objectIDs,electricField):
 
       p.applyExternalForce(objID, -1, [ fx , fy , 0 ], [0, 0, 0], p.WORLD_FRAME)
 
-def prep():
+def prep(vid_path='vid'):
 
    physicsClient = p.connect(p.DIRECT)
    p.setAdditionalSearchPath(pybullet_data.getDataPath())
    # p.setGravity(0, 0, -10)
    plane_id = p.loadURDF("plane.urdf")
 
-   vid = imageio_ffmpeg.write_frames('vid.mp4', (c.cam_width, c.cam_height), fps=30)
+   vid = imageio_ffmpeg.write_frames('{}.mp4'.format(vid_path), (c.cam_width, c.cam_height), fps=30)
    vid.send(None) # The first frame of the video must be a null frame.
 
    objectIDs = p.loadSDF("box.sdf")
@@ -117,9 +117,9 @@ def push(objectIDs,motilityStrength):
 
       p.applyExternalForce(objID, -1, [x,y,z], [0, 0, 0], p.WORLD_FRAME)
 
-def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , electricField = None):
+def simulateCells(numSeconds, motilityStrength = 0 , attractionStrength = 0 , electricField = None, vid_path = 'vid'):
 
-   vid, objectIDs = prep()
+   vid, objectIDs = prep(vid_path)
  
    for t in range(0,625*numSeconds):
 
